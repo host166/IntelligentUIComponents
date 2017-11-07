@@ -1,12 +1,15 @@
 {
     "name": "IntelligentUIComponents",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "description": "intelligent User Interface Components",
     "author": "Jiayou Zuo",
+    "main": "src/index.js",
     "repository": {
         "type": "git",
         "url": "git@github.com:host166/IntelligentUIComponents.git"
     },
+    "license": "MIT",
+
     "scripts": {
         "dev": "node build/dev-server.js",
         "build": "node build/build.js",
