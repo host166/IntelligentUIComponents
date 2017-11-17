@@ -8,6 +8,16 @@ test/unit/coverage
 test/e2e/reports
 selenium-debug.log
 bak/
+build/
+config/
+.gitignore
+.postcssrc.js
+.editorconfig
+.babelrc
+index.html
+static/
+test/
+!src/index.js
 
 # Editor directories and files
 .idea

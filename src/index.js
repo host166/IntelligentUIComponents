@@ -1,17 +1,40 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+/**
+* created by Time on 2017/11/08
+* 安装插件方法
+*	
+*/
+import Vue from 'vue';
+import MessageBox from './components/MessageBox/index.js';
+import Button from './components/Button/index.js';
 
-// Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-	el: '#app',
-	router,
-	template: '<App/>',
-	components: {
-		App
-	}
-})
+// other 
+import { version } from '../package.json';
+
+const widgets = [
+	Button
+];
+
+// 注册全局方法
+var install = function(Vue,opts={}){
+	// // callback new array data
+	widgets.map(item => {
+		// console.log( item.name, item );
+		Vue.component(item.name, item);
+	});
+    // console.log('in install method');
+
+	Vue.prototype.$msgbox = MessageBox;
+};
+
+// verify that the window or Vue object exists to browser 
+if (typeof window !== 'undefined' && window.Vue) {	// auto install
+    install(window.Vue);
+}
+
+export default {
+	version,
+	install,
+	Button,
+	MessageBox
+}
