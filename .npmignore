@@ -1,9 +1,0 @@
-.*
-index.html
-build/
-config/
-dist/
-node_modules/
-src/
-static/
-test/
