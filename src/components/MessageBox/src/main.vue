@@ -1,20 +1,22 @@
 <template>
-    <div @click="closeOnClickModelPrompt" v-if="visible" ref="mgsbox" :class="position?'iuc_msgbox__position_'+position:''" class="pf inc_screen f28 c8 bgMask iuc_message_box__wrap">
-    	<div class="pa pc inc_wrap bgf iuc_message_box" :style="oStyle">
-    		<!-- 提示框标题 -->
-    		<div v-if="title" class="pr c0 iuc_message_box__header">
-    			<strong class="show">{{title}}</strong>
-    			<em @click="closeThisWidgetTap" class="pa pm noStyle c8 close">x</em>
-    		</div>
-    		<!-- 中间部分 -->
-    		<div class="inc_wrap oys iuc_message_box__main" v-html="message"></div>
-    		<!-- 提示框按钮部分 -->
-			<div class="df f26 iuc_message_box__footer">
-                <IUCButton v-show="cancelVisible" @click.native="closeThisWidgetTap" type="cancel" class="btn">{{cancelText}}</IUCButton>
-				<IUCButton v-show="confirmVisible" @click.native="confirmThisWidgetTap" class="btn">{{confirmText}}</IUCButton>
-			</div>
-    	</div>
-    </div>
+
+<div @click="closeOnClickModelPrompt" v-if="visible" ref="mgsbox" :class="position?'iuc_msgbox__position_'+position:''" class="pf inc_screen f28 c5 bgMask iuc_message_box__wrap">
+	<div class="pa pc inc_wrap bgf iuc_message_box" :class="animate?animate+' animated':''" :style="oStyle">
+		<!-- 提示框标题 -->
+		<div v-if="title" class="pr c0 f30 iuc_message_box__header">
+			<strong class="show tac">{{title}}</strong>
+			<!-- <em @click="closeThisWidgetTap" class="pa pm noStyle c8 close">x</em> -->
+		</div>
+		<!-- 中间部分 -->
+		<div class="inc_wrap oys iuc_message_box__main" v-html="message"></div>
+		<!-- 提示框按钮部分 -->
+		<div class="df f30 iuc_message_box__footer">
+            <IUCButton v-show="cancelVisible" @click.native="closeThisWidgetTap" class="btn cancel">{{cancelText}}</IUCButton>
+			<IUCButton v-show="confirmVisible" @click.native="confirmThisWidgetTap" class="btn confirm">{{confirmText}}</IUCButton>
+		</div>
+	</div>
+</div>
+
 </template>
 
 <script>
@@ -61,10 +63,7 @@ export default {
     },
     props: {
         // 出场动画
-        animate: {
-            type: String,
-            default: 'fade'
-        },
+        animate: String,
     	// 宽度
     	width:{
     		type: Number,
@@ -141,7 +140,7 @@ export default {
 
 .iuc_message_box{
 	border-radius:16px;
-    padding-bottom:20px;
+    // padding-bottom:20px;
 }
 .iuc_message_box__header,.iuc_message_box__main,.iuc_message_box__footer{
     padding:0 30px;
@@ -156,15 +155,21 @@ export default {
 }
 .iuc_message_box__main{
     max-height:1000px;
-	padding:20px 30px;
+	padding:40px 30px;
 }
 
 .iuc_message_box__footer{
+    border-top:1px solid #cbcbcb;
     flex-flow:now nowrap;
-    justify-content:center;
+    justify-content:space-between;
+    .btn:first-child{
+        border-right:1px solid #cbcbcb;
+    }
     .btn{
-        margin-left:10px;
-        margin-right:15px;
+        width:50%;
+    }
+    .cancel{
+        color:#000;
     }
 }
 </style>

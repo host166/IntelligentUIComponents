@@ -6,6 +6,7 @@
 import Vue from 'vue';
 import MessageBox from './components/MessageBox/index.js';
 import Button from './components/Button/index.js';
+import Loading from './components/Loading/index.js';
 
 
 // other 
@@ -25,6 +26,7 @@ var install = function(Vue,opts={}){
     // console.log('in install method');
 
 	Vue.prototype.$msgbox = MessageBox;
+	Vue.prototype.$load = Loading;
 };
 
 // verify that the window or Vue object exists to browser 
@@ -36,5 +38,6 @@ export default {
 	version,
 	install,
 	Button,
-	MessageBox
+	MessageBox,
+	Loading
 }

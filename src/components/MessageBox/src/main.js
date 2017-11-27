@@ -17,12 +17,14 @@ var defaults = {
 	width: "",
 	// @param message   : 需要显示的信息内容
 	message : "",
+	// @param animate   : 支持3方入场动画设置
+	animate : "",
 	// @param position  : 弹框的坐标位置
 	position: "middle",
 	// @param cancelText: 取消按钮的文案
 	cancelText: "",
-	// @param cancelText: 确定按钮的文案
-	cancelText: "",
+	// @param confirmText: 确定按钮的文案
+	confirmText: "",
 	// @param cancelVisible { default:false } : 取消按钮是否显示
 	cancelVisible : false,
 	// @param confirmVisible { default:true } : 确定按钮是否显示 

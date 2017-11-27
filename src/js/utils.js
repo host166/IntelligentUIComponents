@@ -979,17 +979,6 @@ function utilsTool(){
     };
 };
 
-// function toolsMethod(){
-//     class Tool{
-//         constructor(){
-
-//         }
-//         // 返回rem值
-//         rem(px){
-
-//         }
-//     }
-// };
 
 // 封装一系列的工具、方法、对象接口···
 class UtilsTool {
@@ -999,7 +988,8 @@ class UtilsTool {
             'oAdapt': {
                 'design': {w:750, h:1334},
                 'mode'  : 'transverse'
-            }
+            },
+            'oTimeline':{}
         };
         var gettype = Object.prototype.toString;
         this.vetifyType = {
@@ -1128,6 +1118,90 @@ class UtilsTool {
             };
         };
         // console.log('source:',s,source);
+    }
+    //以本地时间为单位的计时器
+    timer(name) {  //n, t, fn
+        // 保存时间线的对象
+        var oTimeLine = this.oAuxiliary.oTimeline,
+            timeCycle = 1000/60;  //帧数 || 时间周期
+
+        var oTimer = {
+            // 清除定时器的方法
+            clear(clearname=name){
+                // console.log('clear:',oTimeLine);
+                if( oTimeLine[clearname] ){
+                    clearInterval( oTimeLine[clearname] );
+                    oTimeLine[clearname] = undefined;
+                    delete oTimeLine[clearname];
+                };
+                return this;
+            },
+            // 创建定时器的方法
+            create(obj){
+                const opt = {
+                    cycle    : 0,              //周期 时长
+                    status   : 'install',      //计时器的状态  install初次安装 inter 持续 clear清除 stop暂停 start开始 
+                    resolveFn: function(){}    //计时器结束时的回调
+                };
+                for( let x in obj ) opt[x] = obj[x];
+
+                // 封装计时器方法
+                var _timerMethod = (cyclenumber) => {
+                    if( oTimeLine[name] ){
+                        clearInterval( oTimeLine[name] );
+                        oTimeLine[name] = undefined;
+                    };
+                    // 对应对象存放时间控制方法
+                    var timeStart = (new Date()).getTime(); //开始时间
+                    oTimeLine[name] = setInterval( ()=>{
+                        var timeChange = new Date().getTime(),
+                            second     = opt.cycle * 1000,
+                            scale      = 1 - Math.max(0,timeStart - timeChange + second) / second;
+                        // console.log( scale );
+                        //计时结束停止执行
+                        if( scale >= 1 ){
+                            opt.resolveFn && opt.resolveFn(oTimeLine,opt);
+                            // 判断是要循环还是要停止
+                            if( cyclenumber == 0 && oTimeLine[name] ){
+                                _timerMethod(0);
+                            }else{
+                                clearInterval( oTimeLine[name] );
+                                oTimeLine[name] = undefined;
+                            };
+                        };
+                    },timeCycle);
+                };
+                // 安装定时器
+                if( opt.status === 'install' ){
+                    _timerMethod();
+                };
+                // 循环定时器
+                if( opt.status === 'inter' ){
+                    _timerMethod(0);
+                };
+
+                return this;
+            },
+            // 延期时间 单位毫秒
+            delay(){
+
+                return this;
+            },
+            // 暂停计时器的方法
+            stop(){
+                if( oTimeLine[clearname] ){
+                    clearInterval( oTimeLine[clearname] );
+                };
+                return this;
+            },
+            // 开启定时器的方法
+            start(){
+                // this.create().call(oTimer);
+                return this;
+            }
+        };
+
+        return oTimer;
     }
     // dom选取元素
     query($){

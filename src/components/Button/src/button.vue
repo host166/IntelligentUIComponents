@@ -1,5 +1,5 @@
 <template>
-    <div class="inc_wrap tac f24 iuc_buttom_box__wrap">
+    <div class="inc_wrap tac iuc_buttom_box__wrap">
         <div :class="type?'iuc_button_'+type:''" class="iuc_button_style" :style="StyleSize">
             <slot></slot>
         </div>
@@ -56,7 +56,7 @@ export default {
         type: {
             type: String,
             // primar/cancel/
-            default: 'primary'
+            default: 'prompt'
         },
         // 背景颜色
         bgcolor: {
@@ -85,13 +85,18 @@ export default {
 @import '~@/scss/variable.scss';
 .iuc_buttom_box__wrap{
     font-size: inherit;
+    color:$baseColor;
 }
 .iuc_button_style{
-    padding:0 20PX;
+    padding:0 30px;
     line-height:60px;
     border-radius: 10px;
     background-color: $baseColor;
-    color:#fff;
+    // color:#fff;
+}
+.iuc_button_prompt{
+    background-color:transparent;
+    line-height:80px;
 }
 .iuc_button_primary{
 
