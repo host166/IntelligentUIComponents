@@ -35,7 +35,7 @@ class LoadingFactory{
             status:"install",
             resolveFn: ()=>{
                 this.instance.visible = false;
-                // Utils.timer('loadingVisibleComponents').clear();
+                Utils.timer('loadingVisibleComponents').clear();
             }
         })
     }
@@ -58,9 +58,28 @@ class LoadingFactory{
 			this.instance.visible = true;
 			this.loadingVisibleTime();
 		});
+		return this;
 	}
+	// 关闭
 	close(){
+		// console.log('close');
+		// if( this.loadingSleepNumber ){
+		// 	Utils.timer('sleepMethod').create({
+		// 		cycle:this.loadingSleepNumber,
+		// 		status:'install',
+		// 		resolveFn:()=>{
+		// 			Utils.timer('sleepMethod').create();
+		// 			this.instance.visible = false;
+		// 		}
+		// 	});
+		// 	return false;
+		// };
 		this.instance.visible = false;
+	}
+	// 延迟
+	sleep(n=0){
+		this.loadingSleepNumber = n;
+		return this;
 	}
 }
 

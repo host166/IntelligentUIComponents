@@ -36,18 +36,21 @@ export default {
     methods: {
         loadTap(){
             this.$load.open({
-                timeout:0,
+                timeout:10000,
                 // loadtext: '加载中···',
-                animate: 'slideInDown',
-                loadcolor: 'yellow'
+                animate: 'flash',
+                loadcolor: '#90ce62'
             });
+            // ()=>{
+            //     this.$load.close()
+            // });
         },
         msgTap(){
             this.$msgbox.MessageBox({
                 title : '艺龙机票',
                 position:"middle",
                 cancelVisible:true,
-                animate:'zoomIn',
+                animate:'fadeIn',
                 message:'<p>航班机票</p><p>模板文案模板文案模板文案模板文案模板文案模板文案。</p>'
             },function(){
                 console.log("callback method");
